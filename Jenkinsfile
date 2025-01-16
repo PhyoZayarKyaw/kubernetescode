@@ -69,7 +69,7 @@ spec:
             steps {
                 script {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        withCredentials([usernamePassword(credentialsId: 'github', variable: 'GITHUB_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
+                        withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
                             // Configure Git with username and email
                             sh "git config user.email phyozayarkyaw2018@gmail.com"
                             sh "git config user.name PhyoZayarKyaw"
@@ -86,7 +86,7 @@ spec:
                             // Add, commit, and push changes
                             sh "git add ."
                             sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                            sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetesmanifest.git HEAD:master"
+                            sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetescode.git HEAD:master"
                         }
                     }
                 }
