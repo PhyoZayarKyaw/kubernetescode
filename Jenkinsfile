@@ -15,6 +15,13 @@ spec:
     volumeMounts:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
+  - name: google-cloud-sdk
+    image: google/cloud-sdk
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -67,7 +74,7 @@ spec:
         
         stage('deploy') {
             steps {
-                container(name: 'google/cloud-sdk', shell: '/bin/bash') {
+                container(name: 'google-cloud-sdk', shell: '/bin/bash') {
                     sh '''
                     # Now run kubectl apply (no need to install kubectl, it is already available)
                     kubectl apply -f deployment.yaml
