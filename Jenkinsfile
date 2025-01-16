@@ -64,6 +64,14 @@ spec:
                 }
             }
         }
+        
+        stage('deploy') {
+            steps {
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    sh 'kubectl apply -f deployment.yaml'
+                }
+            }
+        }
 
     }
 }
