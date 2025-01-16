@@ -1,20 +1,24 @@
-FROM python:3.8-slim-buster
-
-WORKDIR /app
-
-# Copy the requirements.txt file
-#COPY requirements.txt requirements.txt
+# Use the official Python image from the Docker Hub
+ FROM python:3.9-slim
 #
-# # Install the required Python packages
-RUN pip3 install flask
+# # Set the working directory in the container
+ WORKDIR /app
 #
-# # Copy the rest of the application code
-COPY . .
+# # Copy the requirements.txt into the container
+ COPY requirements.txt .
 #
-# # Set the environment variable to specify the Flask app
-ENV FLASK_APP=app.py
+# # Install the dependencies from requirements.txt
+ RUN pip install --no-cache-dir -r requirements.txt
 #
-# # Run Flask with the proper command
-#CMD ["flask", "run", "--host=0.0.0.0"]
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
-
+# # Copy the rest of your application code into the container
+ COPY . .
+#
+# # Expose the port that the Flask app will run on (default is 5000)
+ EXPOSE 5000
+#
+# # Set the environment variable for Flask
+ ENV FLASK_APP=app.py
+#
+# # Run the Flask app (production-ready environment variable)
+ CMD ["flask", "run", "--host=0.0.0.0"]
+# 
