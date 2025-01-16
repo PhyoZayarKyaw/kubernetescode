@@ -67,21 +67,14 @@ spec:
         
         stage('deploy') {
             steps {
-                container(name: 'kaniko', shell: '/busybox/sh') {
+                container(name: 'google/cloud-sdk', shell: '/bin/bash') {
                     sh '''
-                        # Install kubectl for Alpine-based image
-                        apk add --no-cache curl
-                        curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
-                        chmod +x kubectl
-                        mv kubectl /usr/local/bin/
-
-                        # Now run kubectl apply
-                        kubectl apply -f deployment.yaml
-                     '''
+                    # Now run kubectl apply (no need to install kubectl, it is already available)
+                    kubectl apply -f deployment.yaml
+                 '''
         }
     }
 }
-
     }
 }
 
