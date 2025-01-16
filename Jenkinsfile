@@ -65,34 +65,6 @@ spec:
             }
         }
 
-        stage('Update GIT') {
-            steps {
-                script {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        withCredentials([string(credentialsId: 'github-token', variable: 'GITHUB_TOKEN')]) {
-                            // Configure Git with username and email
-                            sh "git config user.email phyozayarkyaw2018@gmail.com"
-                            sh "git config user.name PhyoZayarKyaw"
-
-                            // Display the current deployment.yaml content
-                            sh "cat deployment.yaml"
-
-                            // Update the Docker image tag in the deployment.yaml file
-                            sh "sed -i'' 's+phyozayarkyaw/test.*+phyozayarkyaw/test:${BUILD_NUMBER}+g' deployment.yaml"
-
-                            // Display the updated deployment.yaml content
-                            sh "cat deployment.yaml"
-
-                            // Add, commit, and push changes
-                            sh "git add ."
-                            sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
-                            sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/kubernetescode.git HEAD:master"
-                        }
-                    }
-                }
-            }
-        }
-
     }
 }
 
