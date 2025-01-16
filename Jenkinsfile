@@ -64,19 +64,24 @@ spec:
                 }
             }
         }
+        
         stage('deploy') {
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''
-                        # Install kubectl
-                        apt-get update && apt-get install -y kubectl
+                        # Install kubectl for Alpine-based image
+                        apk add --no-cache curl
+                        curl -LO https://dl.k8s.io/release/v1.23.0/bin/linux/amd64/kubectl
+                        chmod +x kubectl
+                        mv kubectl /usr/local/bin/
 
                         # Now run kubectl apply
                         kubectl apply -f deployment.yaml
-                    ''' 
+                     '''
         }
     }
-}    
+}
+
     }
 }
 
