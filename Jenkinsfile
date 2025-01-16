@@ -68,7 +68,7 @@ spec:
         stage('Trigger ManifestUpdate') {
             steps {
                 echo "triggering updatemanifestjob"
-                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: "${BUILD_NUMBER}")]
+                build job: 'updatemanifest'
             }
         }
         stage('Update GIT') {
@@ -84,7 +84,7 @@ spec:
                             sh "cat deployment.yaml"
 
                             // Update the Docker image tag in the deployment.yaml file
-                            sh "sed -i'' 's+phyozayarkyaw/test.*+phyozayarkyaw/test:${DOCKERTAG}+g' deployment.yaml"
+                            sh "sed -i'' 's+phyozayarkyaw/test.*+phyozayarkyaw/test:${BUILD_NUMBER}+g' deployment.yaml"
 
                             // Display the updated deployment.yaml content
                             sh "cat deployment.yaml"
