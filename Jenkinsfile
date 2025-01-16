@@ -43,7 +43,7 @@ spec:
             }
         }
 
-        stage('Build image with Kaniko') {
+        stage('Build and push image with Kaniko') {
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
@@ -61,16 +61,6 @@ spec:
             }
         }
 
-        stage('Push image') {
-            steps {
-                container(name: 'kaniko', shell: '/busybox/sh') {
-                    sh '''#!/busybox/sh
-                        /kaniko/executor --context `pwd` --dockerfile Dockerfile --destination $DOCKER_IMAGE:$BUILD_NUMBER
-                    '''
-                }
-            }
-        }
-       
         stage('Deploy with kubectl') {
             steps {
                 container(name: 'kubectl') {
