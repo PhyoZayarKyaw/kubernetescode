@@ -8,7 +8,7 @@
  COPY requirements.txt .
 #
 # # Install the dependencies from requirements.txt
- RUN pip install --no-cache-dir -r requirements.txt
+ RUN pip install -r requirements.txt --break-system-packages
 #
 # # Copy the rest of your application code into the container
  COPY . .
@@ -20,5 +20,5 @@
  ENV FLASK_APP=app.py
 #
 # # Run the Flask app (production-ready environment variable)
- CMD ["python", "app.py"]
+ CMD ["python3", "app.py"]
 #

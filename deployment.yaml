@@ -19,7 +19,7 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: phyozayarkyaw/test:37
+      - image: phyozayarkyaw/test:39
         name: flaskdemo
         resources: {}
         imagePullPolicy: Always
