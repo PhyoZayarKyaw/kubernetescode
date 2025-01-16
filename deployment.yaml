@@ -5,8 +5,9 @@ metadata:
   labels:
     app: flaskdemo
   name: flaskdemo
+  namespace: jenkins
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: flaskdemo
@@ -18,9 +19,12 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: phyozayarkyaw/test:latest
+      - image: phyozayarkyaw/test:31
         name: flaskdemo
         resources: {}
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: regcred
 status: {}
 ---
 apiVersion: v1
@@ -30,7 +34,7 @@ metadata:
   labels:
     app: lb-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 5000

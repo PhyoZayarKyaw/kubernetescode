@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOnsidXNlcm5hbWUiOiJwaHlvemF5YXJreWF3IiwicGFzc3dvcmQiOiJkY2tyX3BhdF96Ym1oM1l5a3dZSTlNdXBXSV9NbHZib1EzRWciLCJlbWFpbCI6InBoeW96YXlhcmt5YXcyMDE4QGdtYWlsLmNvbSIsImF1dGgiOiJjR2g1YjNwaGVXRnlhM2xoZHpwa1kydHlYM0JoZEY5NlltMW9NMWw1YTNkWlNUbE5kWEJYU1Y5TmJIWmliMUV6UldjPSJ9fX0=
+kind: Secret
+metadata:
+  creationTimestamp: "2025-01-16T07:38:56Z"
+  name: regcred
+  namespace: jenkins
+  resourceVersion: "123039872"
+  uid: 876686b1-e56f-4492-bd93-2286ac981d42
+type: kubernetes.io/dockerconfigjson
