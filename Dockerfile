@@ -20,5 +20,5 @@
  ENV FLASK_APP=app.py
 #
 # # Run the Flask app (production-ready environment variable)
- CMD ["flask", "run", "--host=0.0.0.0"]
-# 
+ CMD ["python", "app.py"]
+#
