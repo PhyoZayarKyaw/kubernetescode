@@ -41,7 +41,6 @@ spec:
             steps {
                 container(name: 'kaniko', shell: '/busybox/sh') {
                     sh '''#!/busybox/sh
-                        echo "FROM jenkins/inbound-agent:latest" > Dockerfile
                         /kaniko/executor --context `pwd` --dockerfile Dockerfile --destination $DOCKER_IMAGE:$BUILD_NUMBER
                     '''
                 }
