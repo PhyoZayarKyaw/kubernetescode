@@ -69,7 +69,7 @@ spec:
             steps {
                 script {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        withCredentials([usernamePassword(credentialsId: 'github', variable: 'GITHUB_TOKEN', usernameVariable: 'GIT_USERNAME')]) {
                             // Configure Git with username and email
                             sh "git config user.email phyozayarkyaw2018@gmail.com"
                             sh "git config user.name PhyoZayarKyaw"
