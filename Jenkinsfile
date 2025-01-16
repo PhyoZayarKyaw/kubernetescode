@@ -64,14 +64,19 @@ spec:
                 }
             }
         }
-        
         stage('deploy') {
             steps {
-                container(name: 'kubectl', image: 'bitnami/kubectl', shell: '/bin/sh') {
-                    sh 'kubectl apply -f deployment.yaml'
+                container(name: 'kaniko', shell: '/busybox/sh') {
+                    sh '''
+                        # Install kubectl
+                        apt-get update && apt-get install -y kubectl
+
+                        # Now run kubectl apply
+                        kubectl apply -f deployment.yaml
+                    ''' 
         }
     }
-}
+}    
     }
 }
 
