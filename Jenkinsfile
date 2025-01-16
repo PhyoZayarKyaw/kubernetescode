@@ -65,12 +65,6 @@ spec:
             }
         }
 
-        stage('Trigger ManifestUpdate') {
-            steps {
-                echo "triggering updatemanifestjob"
-                build job: 'updatemanifest'
-            }
-        }
         stage('Update GIT') {
             steps {
                 script {
