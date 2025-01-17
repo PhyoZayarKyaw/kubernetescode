@@ -16,15 +16,12 @@ spec:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
   - name: kubectl
-    image: bitnami/kubectl:latest
+    image: google/cloud-sdk:latest
     imagePullPolicy: Always
     command:
     - sleep
     args:
     - 9999999
-    volumeMounts:
-      - name: jenkins-docker-cfg
-        mountPath: /kaniko/.docker
   volumes:
   - name: jenkins-docker-cfg
     projected:
@@ -77,15 +74,17 @@ spec:
             }
         }
 
-        stage('Deploy with kubectl') {
+        stage('deploy') {
             steps {
-                container(name: 'kubectl') {
-                    sh 'kubectl get pod -n jenkins'
-                    sh 'kubectl apply -f deployment.yaml'
-                }
-            }
-        } 
-           
+                container(name: 'google-cloud-sdk', shell: '/bin/bash') {
+                    sh '''
+                    # Now run kubectl apply (no need to install kubectl, it is already available)
+                    kubectl get pod -n jenkins
+                    kubectl apply -f deployment.yaml
+                 '''
+        }
+    }
+} 
     }
 }
 
