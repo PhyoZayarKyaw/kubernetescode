@@ -61,6 +61,17 @@ spec:
             }
         }
 
+        stage('Update deployment.yaml with the new image tag') {
+            steps {
+                script {
+                    // Update deployment.yaml with the build number tag
+                    sh """
+                    sed -i 's|$DOCKER_IMAGE:.*|$DOCKER_IMAGE:$BUILD_NUMBER|' deployment.yaml
+                    """
+                }
+            }
+        }
+
         stage('Deploy with kubectl') {
             steps {
                 container(name: 'kubectl') {
