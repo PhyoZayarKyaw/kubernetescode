@@ -26,7 +26,7 @@ spec:
     projected:
       sources:
       - secret:
-          name: regcred
+          name: pzyk
           items:
             - key: .dockerconfigjson
               path: config.json
