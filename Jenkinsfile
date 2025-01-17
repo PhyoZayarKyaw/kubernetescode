@@ -67,6 +67,7 @@ spec:
                     // Update deployment.yaml with the build number tag
                     sh """
                     sed -i 's|$DOCKER_IMAGE:.*|$DOCKER_IMAGE:$BUILD_NUMBER|' deployment.yaml
+                    cat deployment.yaml
                     """
                 }
             }
@@ -75,6 +76,7 @@ spec:
         stage('Deploy with kubectl') {
             steps {
                 container(name: 'kubectl') {
+                    sh 'kubectl get pod -n jenkins'
                     sh 'kubectl apply -f deployment.yaml'
                 }
             }
