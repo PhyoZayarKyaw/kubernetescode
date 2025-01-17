@@ -16,11 +16,15 @@ spec:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
   - name: kubectl
-    image: bitnami/kubectl
+    image: alpine/kubectl:latest
+    imagePullPolicy: Always
     command:
     - sleep
     args:
     - 9999999
+    volumeMounts:
+      - name: jenkins-docker-cfg
+        mountPath: /kaniko/.docker
   volumes:
   - name: jenkins-docker-cfg
     projected:
