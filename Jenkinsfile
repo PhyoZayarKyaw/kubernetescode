@@ -16,7 +16,7 @@ spec:
       - name: jenkins-docker-cfg
         mountPath: /kaniko/.docker
   - name: kubectl
-    image: alpine/kubectl:latest
+    image: bitnami/kubectl:latest
     imagePullPolicy: Always
     command:
     - sleep
