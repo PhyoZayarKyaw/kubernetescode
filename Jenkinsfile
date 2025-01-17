@@ -76,7 +76,7 @@ spec:
 
         stage('deploy') {
             steps {
-                container(name: 'google-cloud-sdk', shell: '/bin/bash') {
+                container(name: 'kubectl', shell: '/bin/bash') {
                     sh '''
                     # Now run kubectl apply (no need to install kubectl, it is already available)
                     kubectl get pod -n jenkins
